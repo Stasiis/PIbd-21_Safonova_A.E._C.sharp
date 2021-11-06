@@ -10,11 +10,11 @@ namespace Stormtrooper_21var_Saf
     public abstract class Vehicle : ITransport
     {
         /// <summary>
-        /// Левая координата отрисовки штурмовика
+        /// Левая координата отрисовки транспорта
         /// </summary>
         protected float _startPosX;
         /// <summary>
-        /// Правая кооридната отрисовки штурмовика
+        /// Правая кооридната отрисовки транспорта
         /// </summary>
         protected float _startPosY;
         /// <summary>
@@ -30,11 +30,11 @@ namespace Stormtrooper_21var_Saf
         /// </summary>
         public int MaxSpeed { protected set; get; }
         /// <summary>
-        /// Вес штурмовика
+        /// Вес транспорта
         /// </summary>
         public float Weight { protected set; get; }
         /// <summary>
-        /// Основной цвет штурмовика
+        /// Основной цвет транспорта
         /// </summary>
         public Color MainColor { protected set; get; }
         public void SetPosition(int x, int y, int width, int height)
