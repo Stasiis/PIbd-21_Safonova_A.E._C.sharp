@@ -8,85 +8,44 @@ using System.Drawing;
 namespace Stormtrooper_21var_Saf
 {
     //отрисовка штурмовика
-    class StormTrooper
+    public class Plane : Vehicle
     {
-        /// <summary>
-        /// Левая координата отрисовки штурмовика
-        /// </summary>
-        private float _startPosX;
-        /// <summary>
-        /// Правая кооридната отрисовки штурмовика
-        /// </summary>
-        private float _startPosY;
-        /// <summary>
-        /// Ширина окна отрисовки
-        /// </summary>
-        private int _pictureWidth;
-        /// <summary>
-        /// Высота окна отрисовки
-        /// </summary>
-        private int _pictureHeight;
         /// <summary>
         /// Ширина отрисовки штурмовика
         /// </summary>
-        private readonly int StormtrooperWidth = 85;
+        protected readonly int StormtrooperWidth = 85;
         /// <summary>
         /// Высота отрисовки штурмовика
         /// </summary>
-        private readonly int StormtrooperHeight = 110;
+        protected readonly int StormtrooperHeight = 110;
         /// <summary>
-        /// Максимальная скорость
-        /// </summary>
-        public int MaxSpeed { private set; get; }
-        /// <summary>
-        /// Вес штурмовика
-        /// </summary>
-        public float Weight { private set; get; }
-        /// <summary>
-        /// Основной цвет
-        /// </summary>
-        public Color MainColor { private set; get; }
-        /// <summary>
-        /// Дополнительный цвет
-        /// </summary>
-        public Color DopColor { private set; get; }
-        public bool Rockets { private set; get; }
-        public bool Window { private set; get; }
-        /// <summary>
-        /// Инициализация свойств
+        /// Конструктор
         /// </summary>
         /// <param name="maxSpeed">Максимальная скорость</param>
         /// <param name="weight">Вес штурмовика</param>
-        /// <param name="mainColor">Основной цвет штурмовика</param>
-        /// <param name="dopColor">Дополнительный цвет</param>
-        /// <param name="rockets">Признак наличия ракет</param>
-        public void Init(int maxSpeed, float weight, Color mainColor, Color dopColor, bool rockets, bool window)
+        /// <param name="mainColor">Основной цвет</param>
+        public Plane(int maxSpeed, float weight, Color mainColor)
         {
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
-            DopColor = dopColor;
-            Rockets = rockets;
-            Window = window;
         }
         /// <summary>
-        /// Установка позиции штурмовика
+        /// Конструкторс изменением размеров самолетов
         /// </summary>
-        /// <param name="x">Координата X</param>
-        /// <param name="y">Координата Y</param>
-        /// <param name="width">Ширина картинки</param>
-        /// <param name="height">Высота картинки</param>
-        public void SetPosition(int x, int y, int width, int height)
+        /// <param name="maxSpeed">Максимальная скорость</param>
+        /// <param name="weight">Вес самолета</param>
+        /// <param name="mainColor">Основной цвет</param>
+        /// <param name="planeWidth">Ширина отрисовки самолета</param>
+        /// <param name="planeHeight">Высота отрисовки самолета</param>
+        protected Plane(int maxSpeed, float weight, Color mainColor, int planeWidth, int planeHeight)
         {
-            _startPosX = x;
-            _startPosY = y;
-            _pictureHeight = height;
-            _pictureWidth = width;
+            MaxSpeed = maxSpeed;
+            Weight = weight;
+            MainColor = mainColor;
+            this.StormtrooperWidth = planeWidth;
+            this.StormtrooperHeight = planeHeight;
         }
-        /// <summary>
-        /// Изменение направления пермещения
-        /// </summary>
-        /// <param name="direction">Направление</param>
         public void MoveTransport(Direction direction)
         {
             float step = MaxSpeed * 100 / Weight;
@@ -123,31 +82,67 @@ namespace Stormtrooper_21var_Saf
             }
         }
         /// <summary>
-        /// Отрисовка штурмовика
+        /// Отрисовка самолета
         /// </summary>
         /// <param name="g"></param>
         public void DrawTransport(Graphics g)
         {
             Pen pen = new Pen(Color.Black);
-            Brush Dop = new SolidBrush(DopColor);
+            //звезды - первая сверху, вторая снизу
+            PointF point1 = new PointF(_startPosX + 33, _startPosY + 30);
+            PointF point2 = new PointF(_startPosX + 29, _startPosY + 27);
+            PointF point3 = new PointF(_startPosX + 31, _startPosY + 32);
+            PointF point4 = new PointF(_startPosX + 27, _startPosY + 35);
+            PointF point5 = new PointF(_startPosX + 32, _startPosY + 35);
+            PointF point6 = new PointF(_startPosX + 33, _startPosY + 39);
+            PointF point7 = new PointF(_startPosX + 35, _startPosY + 35);
+            PointF point8 = new PointF(_startPosX + 40, _startPosY + 35);
+            PointF point9 = new PointF(_startPosX + 36, _startPosY + 32);
+            PointF point10 = new PointF(_startPosX + 37, _startPosY + 27);
+            PointF[] StarPointsUp =
+            {
+                 point1,
+                 point2,
+                 point3,
+                 point4,
+                 point5,
+                 point6,
+                 point7,
+                 point8,
+                 point9,
+                 point10
+            };
+            PointF point11 = new PointF(_startPosX + 33, _startPosY + 70);
+            PointF point12 = new PointF(_startPosX + 29, _startPosY + 67);
+            PointF point13 = new PointF(_startPosX + 31, _startPosY + 72);
+            PointF point14 = new PointF(_startPosX + 27, _startPosY + 75);
+            PointF point15 = new PointF(_startPosX + 32, _startPosY + 75);
+            PointF point16 = new PointF(_startPosX + 33, _startPosY + 79);
+            PointF point17 = new PointF(_startPosX + 35, _startPosY + 75);
+            PointF point18 = new PointF(_startPosX + 40, _startPosY + 75);
+            PointF point19 = new PointF(_startPosX + 36, _startPosY + 72);
+            PointF point20 = new PointF(_startPosX + 37, _startPosY + 67);
+            PointF[] StarPointsDown =
+            {
+                 point11,
+                 point12,
+                 point13,
+                 point14,
+                 point15,
+                 point16,
+                 point17,
+                 point18,
+                 point19,
+                 point20
+            };
+            g.DrawPolygon(pen, StarPointsUp);
+            g.DrawPolygon(pen, StarPointsDown);
+            //доп части
             //отрисуем "тело" самолета, все основание
             g.DrawRectangle(pen, _startPosX + 10, _startPosY + 50, 75, 10);
-            //окно
-            if (Window) 
-            { 
-                g.DrawEllipse(pen, _startPosX + 15, _startPosY + 51, 8, 8);
-                g.FillEllipse(Dop, _startPosX + 15, _startPosY + 51, 8, 8);
-            }
-            //ракеты
-            if (Rockets)
-            {
-                g.FillRectangle(Dop, _startPosX + 10, _startPosY + 20, 50, 5);
-                g.FillRectangle(Dop, _startPosX + 10, _startPosY + 30, 50, 5);
-                g.FillRectangle(Dop, _startPosX + 10, _startPosY + 80, 50, 5);
-                g.FillRectangle(Dop, _startPosX + 10, _startPosY + 90, 50, 5);
-            }            
+            g.DrawLine(pen, _startPosX + 25, _startPosY + 50, _startPosX+25, _startPosY + 60);
             //нос
-            g.DrawLine(pen, _startPosX+10, _startPosY+50, _startPosX, _startPosY + 55);
+            g.DrawLine(pen, _startPosX + 10, _startPosY + 50, _startPosX, _startPosY + 55);
             g.DrawLine(pen, _startPosX, _startPosY + 55, _startPosX + 10, _startPosY + 60);
             //крыло вверх
             g.DrawLine(pen, _startPosX + 25, _startPosY + 50, _startPosX + 25, _startPosY);
