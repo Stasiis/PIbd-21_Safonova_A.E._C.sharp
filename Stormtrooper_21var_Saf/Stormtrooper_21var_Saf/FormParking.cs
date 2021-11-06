@@ -8,8 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsParking;
-using WindowsFormsPlanes;
 
 namespace Stormtrooper_21var_Saf
 {
