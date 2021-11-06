@@ -35,16 +35,17 @@ namespace Stormtrooper_21var_Saf
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStormtroopers)).BeginInit();
             this.SuspendLayout();
             // 
-            // buttonCreate
+            // buttonCreatePlane
             // 
-            this.buttonCreate.Font = new System.Drawing.Font("MV Boli", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCreate.Location = new System.Drawing.Point(8, 8);
-            this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(111, 49);
-            this.buttonCreate.TabIndex = 1;
-            this.buttonCreate.Text = "Создать";
-            this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            this.buttonCreatePlane.Font = new System.Drawing.Font("MV Boli", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCreatePlane.Location = new System.Drawing.Point(12, 12);
+            this.buttonCreatePlane.Name = "buttonCreatePlane";
+            this.buttonCreatePlane.Size = new System.Drawing.Size(150, 50);
+            this.buttonCreatePlane.TabIndex = 2;
+            this.buttonCreatePlane.Text = "Создать военный самолет";
+            this.buttonCreatePlane.UseVisualStyleBackColor = true;
+            this.buttonCreatePlane.UseWaitCursor = true;
+            this.buttonCreatePlane.Click += new System.EventHandler(this.buttonCreatePlane_Click);
             // 
             // buttonDown
             // 
@@ -99,34 +100,46 @@ namespace Stormtrooper_21var_Saf
             this.pictureBoxStormtroopers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBoxStormtroopers.Location = new System.Drawing.Point(0, 0);
             this.pictureBoxStormtroopers.Name = "pictureBoxStormtroopers";
-            this.pictureBoxStormtroopers.Size = new System.Drawing.Size(882, 453);
-            this.pictureBoxStormtroopers.TabIndex = 0;
+            this.pictureBoxStormtroopers.Size = new System.Drawing.Size(800, 450);
+            this.pictureBoxStormtroopers.TabIndex = 10;
             this.pictureBoxStormtroopers.TabStop = false;
+            // 
+            // buttonCreateStormtrooper
+            // 
+            this.buttonCreateStormtrooper.Font = new System.Drawing.Font("MV Boli", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCreateStormtrooper.Location = new System.Drawing.Point(168, 12);
+            this.buttonCreateStormtrooper.Name = "buttonCreateStormtrooper";
+            this.buttonCreateStormtrooper.Size = new System.Drawing.Size(150, 50);
+            this.buttonCreateStormtrooper.TabIndex = 11;
+            this.buttonCreateStormtrooper.Text = "Создать штурмовик";
+            this.buttonCreateStormtrooper.UseVisualStyleBackColor = true;
+            this.buttonCreateStormtrooper.Click += new System.EventHandler(this.buttonCreateStormtrooper_Click);
             // 
             // FormStormtrooper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(882, 453);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonUp);
             this.Controls.Add(this.buttonRight);
             this.Controls.Add(this.buttonLeft);
-            this.Controls.Add(this.buttonCreate);
+            this.Controls.Add(this.buttonCreateStormtrooper);
+            this.Controls.Add(this.buttonCreatePlane);
             this.Controls.Add(this.pictureBoxStormtroopers);
-            this.Name = "FormStormtrooper";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Name = "FormPlanes";
             this.Text = "Штурмовик";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStormtroopers)).EndInit();
             this.ResumeLayout(false);
         }
         #endregion
-        private System.Windows.Forms.PictureBox pictureBoxStormtroopers;
-        private System.Windows.Forms.Button buttonCreate;
-        private System.Windows.Forms.Button buttonLeft;
-        private System.Windows.Forms.Button buttonRight;
-        private System.Windows.Forms.Button buttonUp;
+        private System.Windows.Forms.Button buttonCreatePlane;
         private System.Windows.Forms.Button buttonDown;
+        private System.Windows.Forms.Button buttonUp;
+        private System.Windows.Forms.Button buttonRight;
+        private System.Windows.Forms.Button buttonLeft;
+        private System.Windows.Forms.PictureBox pictureBoxStormtroopers;
+        private System.Windows.Forms.Button buttonCreateStormtrooper;
     }
 }
 
