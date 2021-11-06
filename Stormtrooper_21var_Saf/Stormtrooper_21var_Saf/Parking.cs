@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using WindowsFormsPlanes;
 
-namespace WindowsFormsParking
+namespace FormStormtrooper
 {
-    public class Parking<T,Num> where T : class, ITransport where Num : struct
+    public class Parking<T> where T : class, ITransport
     {
         /// <summary>
         /// Массив объектов, которые храним
@@ -50,7 +49,7 @@ namespace WindowsFormsParking
         /// <param name="p">Парковка</param>
         /// <param name="car">Добавляемый автомобиль</param>
         /// <returns></returns>
-        public static int operator +(Parking<T, Num> p, T Plane)
+        public static int operator +(Parking<T> p, T Plane)
         {
             for (int i = 0; i < p._places.Length; i++)
             {
@@ -74,7 +73,7 @@ namespace WindowsFormsParking
         /// <param name="p">Парковка</param>
         /// <param name="index">Индекс места, с которого пытаемся извлечь объект</param>
         /// <returns></returns>
-        public static T operator -(Parking<T, Num> p, int index)
+        public static T operator -(Parking<T> p, int index)
         {
             if (index >= 0 && index < p._places.Length)
             {
