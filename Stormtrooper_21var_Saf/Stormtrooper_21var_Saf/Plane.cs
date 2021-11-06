@@ -7,22 +7,22 @@ using System.Drawing;
 
 namespace Stormtrooper_21var_Saf
 {
-    //отрисовка штурмовика
+    //отрисовка самолета
     public class Plane : Vehicle
     {
         /// <summary>
-        /// Ширина отрисовки штурмовика
+        /// Ширина отрисовки самолета
         /// </summary>
         protected readonly int StormtrooperWidth = 85;
         /// <summary>
-        /// Высота отрисовки штурмовика
+        /// Высота отрисовки самолета
         /// </summary>
         protected readonly int StormtrooperHeight = 110;
         /// <summary>
         /// Конструктор
         /// </summary>
         /// <param name="maxSpeed">Максимальная скорость</param>
-        /// <param name="weight">Вес штурмовика</param>
+        /// <param name="weight">Вес самолета</param>
         /// <param name="mainColor">Основной цвет</param>
         public Plane(int maxSpeed, float weight, Color mainColor)
         {
