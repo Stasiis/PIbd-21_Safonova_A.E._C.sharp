@@ -128,7 +128,7 @@ namespace Stormtrooper_21var_Saf
             this.Controls.Add(this.buttonCreateStormtrooper);
             this.Controls.Add(this.buttonCreatePlane);
             this.Controls.Add(this.pictureBoxStormtroopers);
-            this.Name = "FormPlanes";
+            this.Name = "FormStormtrooper";
             this.Text = "Штурмовик";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStormtroopers)).EndInit();
             this.ResumeLayout(false);
