@@ -17,6 +17,11 @@ namespace Stormtrooper_21var_Saf
         {
             InitializeComponent();
         }
+        public void SetPlane(ITransport plane)
+        {
+            this.plane = plane;
+            Draw();
+        }
         /// <summary>
         /// Метод отрисовки штурмовика
         /// </summary>
