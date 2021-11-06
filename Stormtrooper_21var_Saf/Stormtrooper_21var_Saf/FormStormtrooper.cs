@@ -12,7 +12,7 @@ namespace Stormtrooper_21var_Saf
 {
     public partial class FormStormtrooper : Form
     {
-        private StormTrooper ST;
+        private ITransport plane;
         public FormStormtrooper()
         {
             InitializeComponent();
@@ -24,7 +24,7 @@ namespace Stormtrooper_21var_Saf
         {
             Bitmap bmp = new Bitmap(pictureBoxStormtroopers.Width, pictureBoxStormtroopers.Height);
             Graphics gr = Graphics.FromImage(bmp);
-            ST.DrawTransport(gr);
+            plane.DrawTransport(gr);
             pictureBoxStormtroopers.Image = bmp;
         }
         /// <summary>
@@ -32,12 +32,18 @@ namespace Stormtrooper_21var_Saf
         /// </summary>
         /// /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void buttonCreate_Click(object sender, EventArgs e)
+        private void buttonCreatePlane_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            ST = new StormTrooper();
-            ST.Init(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Black, Color.Red, true, true); 
-            ST.SetPosition(rnd.Next(50, 150), rnd.Next(100, 150), pictureBoxStormtroopers.Width, pictureBoxStormtroopers.Height);
+            plane = new Plane(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Black);
+            plane.SetPosition(rnd.Next(60, 150), rnd.Next(60, 150), pictureBoxStormtroopers.Width, pictureBoxStormtroopers.Height);
+            Draw();
+        }
+        private void buttonCreateStormtrooper_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            plane = new Stormtrooper(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Black, Color.Red, true, true);
+            plane.SetPosition(rnd.Next(60, 150), rnd.Next(60, 150), pictureBoxStormtroopers.Width, pictureBoxStormtroopers.Height);
             Draw();
         }
         /// <summary>
@@ -52,16 +58,16 @@ namespace Stormtrooper_21var_Saf
             switch (name)
             {
                 case "buttonUp":
-                    ST.MoveTransport(Direction.Up);
+                    plane.MoveTransport(Direction.Up);
                     break;
                 case "buttonDown":
-                    ST.MoveTransport(Direction.Down);
+                    plane.MoveTransport(Direction.Down);
                     break;
                 case "buttonLeft":
-                    ST.MoveTransport(Direction.Left);
+                    plane.MoveTransport(Direction.Left);
                     break;
                 case "buttonRight":
-                    ST.MoveTransport(Direction.Right);
+                    plane.MoveTransport(Direction.Right);
                     break;
             }
             Draw();
