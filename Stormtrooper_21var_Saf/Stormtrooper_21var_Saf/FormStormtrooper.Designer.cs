@@ -26,12 +26,13 @@ namespace Stormtrooper_21var_Saf
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonCreate = new System.Windows.Forms.Button();
+            this.buttonCreatePlane = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonUp = new System.Windows.Forms.Button();
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
             this.pictureBoxStormtroopers = new System.Windows.Forms.PictureBox();
+            this.buttonCreateStormtrooper = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStormtroopers)).BeginInit();
             this.SuspendLayout();
             // 
