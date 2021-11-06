@@ -11,15 +11,15 @@ using System.Windows.Forms;
 using WindowsFormsParking;
 using WindowsFormsPlanes;
 
-namespace WindowsFormsParking
+namespace Stormtrooper_21var_Saf
 {
     public partial class FormParking : Form
     {
-        private readonly Parking<Plane, int> parking;
+        private readonly Parking<Plane> parking;
         public FormParking()
         {
             InitializeComponent();
-            parking = new Parking<Plane, int>(pictureBoxParking.Width, pictureBoxParking.Height);
+            parking = new Parking<Plane>(pictureBoxParking.Width, pictureBoxParking.Height);
             Draw();
         }
         private void Draw()
@@ -73,7 +73,7 @@ namespace WindowsFormsParking
                 var plane = parking - Convert.ToInt32(maskedTextBox.Text);
                 if (plane != null)
                 {
-                    FormPlanes form = new FormPlanes();
+                    FormStormtrooper form = new FormStormtrooper();
                     form.SetPlane(plane);
                     form.ShowDialog();
                 }
