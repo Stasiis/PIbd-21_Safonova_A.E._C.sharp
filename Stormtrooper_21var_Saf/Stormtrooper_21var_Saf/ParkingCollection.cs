@@ -5,15 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using WindowsFormsPlanes;
 
-namespace WindowsFormsParking
+namespace Stormtrooper_21var_Saf
 {
     public class ParkingCollection
     {
         public readonly Dictionary<string, Parking<Vehicle>> parkingStages;
         public List<string> Keys => parkingStages.Keys.ToList();
-        //
-
-        //
         private readonly int pictureWidth;
         private readonly int pictureHeight;
         public ParkingCollection(int pictureWidth, int pictureHeight)
@@ -31,9 +28,9 @@ namespace WindowsFormsParking
             parkingStages.Add(name, new Parking<Vehicle>(pictureHeight, pictureWidth));
         }
         /// <summary>
-        /// Удаление парковки
+        /// Удаление ангара
         /// </summary>
-        /// <param name="name">Название парковки</param>
+        /// <param name="name">Название ангара</param>
         public void DelParking(string name)
         {
             if (parkingStages.ContainsKey(name))
@@ -42,7 +39,7 @@ namespace WindowsFormsParking
             }
         }
         /// <summary>
-        /// Доступ к парковке
+        /// Доступ к ангару
         /// </summary>
         /// <param name="ind"></param>
         /// <returns></returns>
