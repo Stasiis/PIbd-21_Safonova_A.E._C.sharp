@@ -13,52 +13,61 @@ namespace Stormtrooper_21var_Saf
 {
     public partial class FormParking : Form
     {
-        private readonly Parking<Plane> parking;
+        private readonly ParkingCollection parkingCollection;
         public FormParking()
         {
             InitializeComponent();
-            parking = new Parking<Plane>(pictureBoxParking.Width, pictureBoxParking.Height);
+            parkingCollection = new ParkingCollection(pictureBoxParking.Height, pictureBoxParking.Width); 
             Draw();
         }
         private void Draw()
         {
-            Bitmap bmp = new Bitmap(pictureBoxParking.Width, pictureBoxParking.Height);
-            Graphics gr = Graphics.FromImage(bmp);
-            parking.Draw(gr);
-            pictureBoxParking.Image = bmp;
+            if (listBoxParking.SelectedIndex > -1)
+            {
+                Bitmap bmp = new Bitmap(pictureBoxParking.Height, pictureBoxParking.Width);
+                Graphics gr = Graphics.FromImage(bmp);
+                parkingCollection[listBoxParking.SelectedItem.ToString()].Draw(gr);
+                pictureBoxParking.Image = bmp;
+            }
         }
         private void buttonParkingPlane_Click(object sender, EventArgs e)
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (listBoxParking.SelectedIndex > -1)
             {
-                var plane = new Plane(100, 1000, dialog.Color);
-                if (parking + plane==1)
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    Draw();
-                }
-                else
-                {
-                    MessageBox.Show("Парковка переполнена");
-                }
-            }
-        }
-        private void buttonParkingST_Click(object sender, EventArgs e)
-        {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                ColorDialog dialogDop = new ColorDialog();
-                if (dialogDop.ShowDialog() == DialogResult.OK)
-                {
-                    var plane = new Stormtrooper(100, 1000, dialog.Color, dialogDop.Color,true,true);
-                    if (parking + plane==1)
+                    var plane = new Plane(100, 1000, dialog.Color);
+                    if (parkingCollection[listBoxParking.SelectedItem.ToString()] + plane > -1)
                     {
                         Draw();
                     }
                     else
                     {
-                        MessageBox.Show("Парковка переполнена");
+                        MessageBox.Show("Ангар переполнен");
+                    }
+                }
+            }
+        }
+        private void buttonParkingST_Click(object sender, EventArgs e)
+        {
+            if (listBoxParking.SelectedIndex > -1)
+            {
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    ColorDialog dialogDop = new ColorDialog();
+                    if (dialogDop.ShowDialog() == DialogResult.OK)
+                    {
+                        var plane = new Stormtrooper(100, 1000, dialog.Color, dialogDop.Color,true,true);
+                        if (parkingCollection[listBoxParking.SelectedItem.ToString()] + plane > -1)
+                        {
+                            Draw();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Парковка переполнена");
+                        }
                     }
                 }
             }
@@ -66,15 +75,59 @@ namespace Stormtrooper_21var_Saf
 
         private void buttonTakePlane_Click(object sender, EventArgs e)
         {
-            if (maskedTextBox.Text != "")
+            if (listBoxParking.SelectedIndex > -1 && maskedTextBox.Text != "")
             {
-                var plane = parking - Convert.ToInt32(maskedTextBox.Text);
+                var plane = parkingCollection[listBoxParking.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
                 if (plane != null)
                 {
                     FormStormtrooper form = new FormStormtrooper();
                     form.SetPlane(plane);
                     form.ShowDialog();
                 }
+                Draw();
+            }
+        }
+        private void ReloadLevels()
+        {
+            int index = listBoxParking.SelectedIndex;
+            listBoxParking.Items.Clear();
+            listBoxParking.Items.AddRange(parkingCollection.Keys.ToArray());
+            if (listBoxParking.Items.Count > 0 && (index == -1 || index >= listBoxParking.Items.Count))
+            {
+                listBoxParking.SelectedIndex = 0;
+            }
+            else if (listBoxParking.Items.Count > 0 && index > -1 && index < listBoxParking.Items.Count)
+            {
+                listBoxParking.SelectedIndex = index;
+            }
+        }
+        private void buttonAddParking_Click(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(textBoxNewLevelName.Text))
+            {
+                MessageBox.Show("Введите название парковки", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+            parkingCollection.AddParking(textBoxNewLevelName.Text);
+            ReloadLevels();
+            }
+        }
+        private void buttonDelParking_Click(object sender, EventArgs e)
+        {
+            if (listBoxParking.SelectedIndex > -1)
+            {
+                if (MessageBox.Show($"Удалить парковку {listBoxParking.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    parkingCollection.DelParking(listBoxParking.SelectedItem.ToString());
+                    ReloadLevels();
+                }
+            }
+        }
+        private void listBoxParking_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listBoxParking.SelectedIndex > -1)
+            {
                 Draw();
             }
         }
