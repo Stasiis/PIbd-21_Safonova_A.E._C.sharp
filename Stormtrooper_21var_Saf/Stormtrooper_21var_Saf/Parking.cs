@@ -9,10 +9,8 @@ namespace Stormtrooper_21var_Saf
 {
     public class Parking<T> where T : class, ITransport
     {
-        /// <summary>
-        /// Массив объектов, которые храним
-        /// </summary>
-        private readonly T[] _places;
+        private readonly List<T> _places;
+        private readonly int _maxCount;
         /// <summary>
         /// Ширина окна отрисовки
         /// </summary>
@@ -32,53 +30,51 @@ namespace Stormtrooper_21var_Saf
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="picWidth">Рамзер парковки - ширина</param>
-        /// <param name="picHeight">Рамзер парковки - высота</param>
+        /// <param name="picWidth">Рамзер ангара - ширина</param>
+        /// <param name="picHeight">Рамзер ангара - высота</param>
         public Parking(int picWidth, int picHeight)
         {
             int width = picWidth / _placeSizeWidth;
             int height = picHeight / _placeSizeHeight;
-            _places = new T[width * height];
+            _maxCount = width * height;
             pictureWidth = picWidth;
             pictureHeight = picHeight;
+            _places = new List<T>();
         }
         public static int operator +(Parking<T> p, T Plane)
         {
-            for (int i = 0; i < p._places.Length; i++)
+            if (p._places.Count < p._maxCount)
             {
-                if (p._places[i] is null)
-                {
-                    p._places[i] = Plane;
-                    int width = p.pictureWidth / p._placeSizeWidth;
-                    int height = p.pictureHeight / p._placeSizeHeight;
-                    int column = i / height;
-                    int row = i % width;
-                    Plane.SetPosition(row * p._placeSizeWidth + p._placeSizeWidth / 8, column * p._placeSizeHeight + p._placeSizeHeight/18 , p.pictureWidth, p.pictureHeight);
-                    return 1;
-                }
+                p._places.Add(Plane);
+                return 1;
             }
             return -1;
         }
         public static T operator -(Parking<T> p, int index)
         {
-            if (index >= 0 && index < p._places.Length)
+            if (index <= -1 || index >= p._places.Count)
             {
-                var res = p._places[index];
-                p._places[index] = null;
-                return res;
+                return null;
             }
-            return null;
+            T ship = p._places[index];
+            p._places.RemoveAt(index);
+            return ship;            
         }
         /// <summary>
-        /// Метод отрисовки парковки
+        /// Метод отрисовки ангара
         /// </summary>
         /// <param name="g"></param>
         public void Draw(Graphics g)
         {
             DrawMarking(g);
-            for (int i = 0; i < _places.Length; i++)
+            for (int i = 0; i < _places.Count; i++)
             {
-                _places[i]?.DrawTransport(g);
+                int width = pictureWidth / _placeSizeWidth;
+                int height = pictureHeight / _placeSizeHeight;
+                int column = i / height;
+                int row = i % width;
+                _places[i].SetPosition(row * _placeSizeWidth + _placeSizeWidth / 8, column * _placeSizeHeight + _placeSizeHeight / 18, pictureWidth, pictureHeight);
+                _places[i].DrawTransport(g);
             }
         }
         /// <summary>
