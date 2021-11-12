@@ -42,13 +42,6 @@ namespace Stormtrooper_21var_Saf
             pictureWidth = picWidth;
             pictureHeight = picHeight;
         }
-        /// <summary>
-        /// Перегрузка оператора сложения
-        /// Логика действия: на парковку добавляется автомобиль
-        /// </summary>
-        /// <param name="p">Парковка</param>
-        /// <param name="car">Добавляемый автомобиль</param>
-        /// <returns></returns>
         public static int operator +(Parking<T> p, T Plane)
         {
             for (int i = 0; i < p._places.Length; i++)
@@ -66,13 +59,6 @@ namespace Stormtrooper_21var_Saf
             }
             return -1;
         }
-        /// <summary>
-        /// Перегрузка оператора вычитания
-        /// Логика действия: с парковки забираем автомобиль
-        /// </summary>
-        /// <param name="p">Парковка</param>
-        /// <param name="index">Индекс места, с которого пытаемся извлечь объект</param>
-        /// <returns></returns>
         public static T operator -(Parking<T> p, int index)
         {
             if (index >= 0 && index < p._places.Length)
