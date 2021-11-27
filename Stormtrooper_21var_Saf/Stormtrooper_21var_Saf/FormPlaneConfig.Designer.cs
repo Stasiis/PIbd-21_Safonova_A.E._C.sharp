@@ -1,5 +1,5 @@
 ﻿
-namespace WindowsFormsParking
+namespace Stormtrooper_21var_Saf
 {
     partial class FormPlaneConfig
     {
