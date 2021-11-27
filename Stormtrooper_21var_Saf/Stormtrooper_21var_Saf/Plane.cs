@@ -18,6 +18,7 @@ namespace Stormtrooper_21var_Saf
         /// Высота отрисовки самолета
         /// </summary>
         protected readonly int StormtrooperHeight = 110;
+        protected readonly char separator = ';';
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -29,6 +30,16 @@ namespace Stormtrooper_21var_Saf
             MaxSpeed = maxSpeed;
             Weight = weight;
             MainColor = mainColor;
+        }
+        public Plane(string info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+            }
         }
         /// <summary>
         /// Конструкторс изменением размеров самолетов
