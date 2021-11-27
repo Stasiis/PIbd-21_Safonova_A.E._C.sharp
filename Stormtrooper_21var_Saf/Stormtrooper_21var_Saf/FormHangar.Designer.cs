@@ -106,7 +106,7 @@ namespace Stormtrooper_21var_Saf
             this.listBoxHangar.FormattingEnabled = true;
             this.listBoxHangar.ItemHeight = 16;
             this.listBoxHangar.Location = new System.Drawing.Point(783, 82);
-            this.listBoxHangar.Name = "listBoxParking";
+            this.listBoxHangar.Name = "listBoxHangar";
             this.listBoxHangar.Size = new System.Drawing.Size(153, 84);
             this.listBoxHangar.TabIndex = 4;
             this.listBoxHangar.SelectedIndexChanged += new System.EventHandler(this.listBoxHangar_SelectedIndexChanged);
