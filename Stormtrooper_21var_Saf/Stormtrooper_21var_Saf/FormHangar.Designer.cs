@@ -1,7 +1,7 @@
 ﻿
 namespace Stormtrooper_21var_Saf
 {
-    partial class FormParking
+    partial class FormHangar
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -29,50 +29,39 @@ namespace Stormtrooper_21var_Saf
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBoxParking = new System.Windows.Forms.PictureBox();
-            this.buttonParkingPlane = new System.Windows.Forms.Button();
-            this.buttonParkingST = new System.Windows.Forms.Button();
+            this.pictureBoxHangar = new System.Windows.Forms.PictureBox();
+            this.buttonAddPlane = new System.Windows.Forms.Button();
             this.groupBox = new System.Windows.Forms.GroupBox();
             this.buttonTakePlane = new System.Windows.Forms.Button();
             this.maskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.listBoxParking = new System.Windows.Forms.ListBox();
-            this.buttonAddParking = new System.Windows.Forms.Button();
-            this.buttonDelParking = new System.Windows.Forms.Button();
+            this.listBoxHangar = new System.Windows.Forms.ListBox();
+            this.buttonAddHangar = new System.Windows.Forms.Button();
+            this.buttonDelHangar = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxNewLevelName = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHangar)).BeginInit();
             this.groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pictureBoxParking
+            // pictureBoxHangar
             // 
-            this.pictureBoxParking.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.pictureBoxParking.Location = new System.Drawing.Point(1, 0);
-            this.pictureBoxParking.Name = "pictureBoxParking";
-            this.pictureBoxParking.Size = new System.Drawing.Size(780, 499);
-            this.pictureBoxParking.TabIndex = 0;
-            this.pictureBoxParking.TabStop = false;
+            this.pictureBoxHangar.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.pictureBoxHangar.Location = new System.Drawing.Point(1, 0);
+            this.pictureBoxHangar.Name = "pictureBoxHangar";
+            this.pictureBoxHangar.Size = new System.Drawing.Size(780, 499);
+            this.pictureBoxHangar.TabIndex = 0;
+            this.pictureBoxHangar.TabStop = false;
             // 
-            // buttonParkingPlane
+            // buttonAddPlane
             // 
-            this.buttonParkingPlane.Location = new System.Drawing.Point(787, 12);
-            this.buttonParkingPlane.Name = "buttonParkingPlane";
-            this.buttonParkingPlane.Size = new System.Drawing.Size(131, 77);
-            this.buttonParkingPlane.TabIndex = 1;
-            this.buttonParkingPlane.Text = "Припарковать самолет";
-            this.buttonParkingPlane.UseVisualStyleBackColor = true;
-            this.buttonParkingPlane.Click += new System.EventHandler(this.buttonParkingPlane_Click);
-            // 
-            // buttonParkingST
-            // 
-            this.buttonParkingST.Location = new System.Drawing.Point(787, 95);
-            this.buttonParkingST.Name = "buttonParkingST";
-            this.buttonParkingST.Size = new System.Drawing.Size(131, 77);
-            this.buttonParkingST.TabIndex = 2;
-            this.buttonParkingST.Text = "Припарковать штурмовик";
-            this.buttonParkingST.UseVisualStyleBackColor = true;
-            this.buttonParkingST.Click += new System.EventHandler(this.buttonParkingST_Click);
+            this.buttonAddPlane.Location = new System.Drawing.Point(783, 264);
+            this.buttonAddPlane.Name = "buttonAddPlane";
+            this.buttonAddPlane.Size = new System.Drawing.Size(153, 88);
+            this.buttonAddPlane.TabIndex = 9;
+            this.buttonAddPlane.Text = "Добавить самолет";
+            this.buttonAddPlane.UseVisualStyleBackColor = true;
+            this.buttonAddPlane.Click += new System.EventHandler(this.buttonAddPlane_Click);
             // 
             // groupBox
             // 
@@ -112,35 +101,35 @@ namespace Stormtrooper_21var_Saf
             this.label1.TabIndex = 4;
             this.label1.Text = "Место:";
             // 
-            // listBoxParking
+            // listBoxHangar
             // 
-            this.listBoxParking.FormattingEnabled = true;
-            this.listBoxParking.ItemHeight = 16;
-            this.listBoxParking.Location = new System.Drawing.Point(783, 82);
-            this.listBoxParking.Name = "listBoxParking";
-            this.listBoxParking.Size = new System.Drawing.Size(153, 84);
-            this.listBoxParking.TabIndex = 4;
-            this.listBoxParking.SelectedIndexChanged += new System.EventHandler(this.listBoxParking_SelectedIndexChanged);
+            this.listBoxHangar.FormattingEnabled = true;
+            this.listBoxHangar.ItemHeight = 16;
+            this.listBoxHangar.Location = new System.Drawing.Point(783, 82);
+            this.listBoxHangar.Name = "listBoxHangar";
+            this.listBoxHangar.Size = new System.Drawing.Size(153, 84);
+            this.listBoxHangar.TabIndex = 4;
+            this.listBoxHangar.SelectedIndexChanged += new System.EventHandler(this.listBoxHangar_SelectedIndexChanged);
             // 
-            // buttonAddParking
+            // buttonAddHangar
             // 
-            this.buttonAddParking.Location = new System.Drawing.Point(783, 48);
-            this.buttonAddParking.Name = "buttonAddParking";
-            this.buttonAddParking.Size = new System.Drawing.Size(153, 28);
-            this.buttonAddParking.TabIndex = 5;
-            this.buttonAddParking.Text = "Добавить парковку";
-            this.buttonAddParking.UseVisualStyleBackColor = true;
-            this.buttonAddParking.Click += new System.EventHandler(this.buttonAddParking_Click);
+            this.buttonAddHangar.Location = new System.Drawing.Point(783, 48);
+            this.buttonAddHangar.Name = "buttonAddHangar";
+            this.buttonAddHangar.Size = new System.Drawing.Size(153, 28);
+            this.buttonAddHangar.TabIndex = 5;
+            this.buttonAddHangar.Text = "Добавить ангар";
+            this.buttonAddHangar.UseVisualStyleBackColor = true;
+            this.buttonAddHangar.Click += new System.EventHandler(this.buttonAddHangar_Click);
             // 
-            // buttonDelParking
+            // buttonDelHangar
             // 
-            this.buttonDelParking.Location = new System.Drawing.Point(783, 172);
-            this.buttonDelParking.Name = "buttonDelParking";
-            this.buttonDelParking.Size = new System.Drawing.Size(153, 28);
-            this.buttonDelParking.TabIndex = 6;
-            this.buttonDelParking.Text = "Удалить парковку";
-            this.buttonDelParking.UseVisualStyleBackColor = true;
-            this.buttonDelParking.Click += new System.EventHandler(this.buttonDelParking_Click);
+            this.buttonDelHangar.Location = new System.Drawing.Point(783, 172);
+            this.buttonDelHangar.Name = "buttonDelHangar";
+            this.buttonDelHangar.Size = new System.Drawing.Size(153, 28);
+            this.buttonDelHangar.TabIndex = 6;
+            this.buttonDelHangar.Text = "Удалить ангар";
+            this.buttonDelHangar.UseVisualStyleBackColor = true;
+            this.buttonDelHangar.Click += new System.EventHandler(this.buttonDelHangar_Click);
             // 
             // label2
             // 
@@ -149,7 +138,7 @@ namespace Stormtrooper_21var_Saf
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 17);
             this.label2.TabIndex = 7;
-            this.label2.Text = "Парковки:";
+            this.label2.Text = "Ангары:";
             // 
             // textBoxNewLevelName
             // 
@@ -158,23 +147,22 @@ namespace Stormtrooper_21var_Saf
             this.textBoxNewLevelName.Size = new System.Drawing.Size(153, 22);
             this.textBoxNewLevelName.TabIndex = 8;
             // 
-            // FormParking
+            // FormHangar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(930, 500);
             this.Controls.Add(this.textBoxNewLevelName);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.buttonDelParking);
-            this.Controls.Add(this.buttonAddParking);
-            this.Controls.Add(this.listBoxParking);
+            this.Controls.Add(this.buttonDelHangar);
+            this.Controls.Add(this.buttonAddHangar);
+            this.Controls.Add(this.listBoxHangar);
             this.Controls.Add(this.groupBox);
-            this.Controls.Add(this.buttonParkingST);
-            this.Controls.Add(this.buttonParkingPlane);
-            this.Controls.Add(this.pictureBoxParking);
-            this.Name = "FormParking";
+            this.Controls.Add(this.buttonAddPlane);
+            this.Controls.Add(this.pictureBoxHangar);
+            this.Name = "FormHangar";
             this.Text = "Angar";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHangar)).EndInit();
             this.groupBox.ResumeLayout(false);
             this.groupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -184,16 +172,15 @@ namespace Stormtrooper_21var_Saf
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pictureBoxParking;
-        private System.Windows.Forms.Button buttonParkingPlane;
-        private System.Windows.Forms.Button buttonParkingST;
+        private System.Windows.Forms.PictureBox pictureBoxHangar;
+        private System.Windows.Forms.Button buttonAddPlane;
         private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonTakePlane;
         private System.Windows.Forms.MaskedTextBox maskedTextBox;
-        private System.Windows.Forms.ListBox listBoxParking;
-        private System.Windows.Forms.Button buttonAddParking;
-        private System.Windows.Forms.Button buttonDelParking;
+        private System.Windows.Forms.ListBox listBoxHangar;
+        private System.Windows.Forms.Button buttonAddHangar;
+        private System.Windows.Forms.Button buttonDelHangar;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxNewLevelName;
     }

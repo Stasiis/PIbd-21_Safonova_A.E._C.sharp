@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Stormtrooper_21var_Saf
 {
-    public class Parking<T> where T : class, ITransport
+    public class Hangar<T> where T : class, ITransport
     {
         private readonly List<T> _places;
         private readonly int _maxCount;
@@ -32,7 +32,7 @@ namespace Stormtrooper_21var_Saf
         /// </summary>
         /// <param name="picWidth">Рамзер ангара - ширина</param>
         /// <param name="picHeight">Рамзер ангара - высота</param>
-        public Parking(int picWidth, int picHeight)
+        public Hangar(int picWidth, int picHeight)
         {
             int width = picWidth / _placeSizeWidth;
             int height = picHeight / _placeSizeHeight;
@@ -41,24 +41,24 @@ namespace Stormtrooper_21var_Saf
             pictureHeight = picHeight;
             _places = new List<T>();
         }
-        public static int operator +(Parking<T> p, T Plane)
+        public static int operator +(Hangar<T> p, T Plane)
         {
             if (p._places.Count < p._maxCount)
             {
                 p._places.Add(Plane);
-                return 1;
+                return p._places.Count;
             }
             return -1;
         }
-        public static T operator -(Parking<T> p, int index)
+        public static T operator -(Hangar<T> p, int index)
         {
             if (index <= -1 || index >= p._places.Count)
             {
                 return null;
             }
-            T ship = p._places[index];
+            T plane = p._places[index];
             p._places.RemoveAt(index);
-            return ship;            
+            return plane;            
         }
         /// <summary>
         /// Метод отрисовки ангара
@@ -78,7 +78,7 @@ namespace Stormtrooper_21var_Saf
             }
         }
         /// <summary>
-        /// Метод отрисовки разметки парковочных мест
+        /// Метод отрисовки разметки
         /// </summary>
         /// <param name="g"></param>
         private void DrawMarking(Graphics g)

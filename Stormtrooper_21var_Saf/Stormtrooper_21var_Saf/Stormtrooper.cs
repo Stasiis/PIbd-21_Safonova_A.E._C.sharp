@@ -47,5 +47,9 @@ namespace Stormtrooper_21var_Saf
             }
             base.DrawTransport(g);
         }
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;
+        }
     }
 }
