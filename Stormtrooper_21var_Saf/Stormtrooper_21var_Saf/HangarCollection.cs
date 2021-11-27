@@ -12,6 +12,7 @@ namespace Stormtrooper_21var_Saf
         public List<string> Keys => HangarStages.Keys.ToList();
         private readonly int pictureWidth;
         private readonly int pictureHeight;
+        private readonly char separator = ':';
         public HangarCollection(int pictureWidth, int pictureHeight)
         {
             HangarStages = new Dictionary<string, Hangar<Vehicle>>();
