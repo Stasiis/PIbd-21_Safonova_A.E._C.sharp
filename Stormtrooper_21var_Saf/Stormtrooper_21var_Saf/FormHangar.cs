@@ -71,7 +71,7 @@ namespace Stormtrooper_21var_Saf
                 var plane = hangarCollection[listBoxHangar.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
                 if (plane != null)
                 {
-                    FormPlanes form = new FormPlanes();
+                    FormStormtrooper form = new FormStormtrooper();
                     form.SetPlane(plane);
                     form.ShowDialog();
                 }
