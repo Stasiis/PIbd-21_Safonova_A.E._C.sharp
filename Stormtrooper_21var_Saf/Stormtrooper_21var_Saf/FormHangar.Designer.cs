@@ -160,7 +160,7 @@ namespace Stormtrooper_21var_Saf
             this.Controls.Add(this.groupBox);
             this.Controls.Add(this.buttonAddPlane);
             this.Controls.Add(this.pictureBoxHangar);
-            this.Name = "FormParking";
+            this.Name = "FormHangar";
             this.Text = "Angar";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxParking)).EndInit();
             this.groupBox.ResumeLayout(false);
