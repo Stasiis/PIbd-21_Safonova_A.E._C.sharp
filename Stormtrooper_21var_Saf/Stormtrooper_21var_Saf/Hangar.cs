@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Collections;
 
 namespace Stormtrooper_21var_Saf
 {
-    public class Hangar<T> where T : class, ITransport
+    public class Hangar<T> : IEnumerator<T>, IEnumerable<T>  where T : class, ITransport
     {
         private readonly List<T> _places;
         private readonly int _maxCount;
@@ -27,6 +28,9 @@ namespace Stormtrooper_21var_Saf
         /// Размер парковочного места (высота)
         /// </summary>
         private readonly int _placeSizeHeight = 120;
+        private int _currentIndex;
+        public T Current => _places[_currentIndex];
+        object IEnumerator.Current => _places[_currentIndex];
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -40,11 +44,16 @@ namespace Stormtrooper_21var_Saf
             pictureWidth = picWidth;
             pictureHeight = picHeight;
             _places = new List<T>();
+            _currentIndex = -1;
         }
         public static int operator +(Hangar<T> p, T Plane)
         {
             if (p._places.Count < p._maxCount)
             {
+                if (p._places.Contains(Plane))
+                {
+                    throw new HangarAlreadyHaveException();
+                }
                 p._places.Add(Plane);
                 return p._places.Count;
             }
@@ -100,6 +109,31 @@ namespace Stormtrooper_21var_Saf
                 return null;
             }
             return _places[index];
+        }
+        public void Sort() => _places.Sort((IComparer<T>)new PlaneComparer());
+        public void Dispose()
+        {
+        }
+        public bool MoveNext()
+        {
+            if (_currentIndex < _places.Count - 1)
+            {
+                _currentIndex++;
+                return true;
+            }
+            return false;
+        }
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this;
         }
     }
 }
