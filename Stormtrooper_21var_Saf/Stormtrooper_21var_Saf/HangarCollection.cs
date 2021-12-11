@@ -20,6 +20,7 @@ namespace Stormtrooper_21var_Saf
             HangarStages = new Dictionary<string, Hangar<Vehicle>>();
             this.pictureWidth = pictureWidth;
             this.pictureHeight = pictureHeight;
+            logger = LogManager.GetCurrentClassLogger();
         }
         public void AddHangar(string name)
         {
@@ -62,8 +63,7 @@ namespace Stormtrooper_21var_Saf
                 foreach (var level in HangarStages)
                 {
                     fs.Write($"Hangar{separator}{level.Key}{Environment.NewLine}", fs);
-                    ITransport plane = null;
-                    for (int i = 0; (plane = level.Value.GetNext(i)) != null; i++)
+                    foreach (ITransport plane in level.Value)
                     {
                         if (plane != null)
                         {
