@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using NLog;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,10 +15,12 @@ namespace Stormtrooper_21var_Saf
     public partial class FormHangar : Form
     {
         private readonly HangarCollection hangarCollection;
+        private readonly Logger logger;
         public FormHangar()
         {
             InitializeComponent();
             hangarCollection = new HangarCollection(pictureBoxHangar.Height, pictureBoxHangar.Width); 
+            logger = LogManager.GetCurrentClassLogger();
             Draw();
         }
         private void ReloadLevels()
@@ -54,13 +57,26 @@ namespace Stormtrooper_21var_Saf
         {
             if (plane != null && listBoxHangar.SelectedIndex > -1)
             {
-                if (hangarCollection[listBoxHangar.SelectedItem.ToString()] + plane>-1)
+                 try
                 {
-                    Draw();
+                    if (hangarCollection[listBoxHangar.SelectedItem.ToString()] + plane > -1)
+                    {
+                        Draw();
+                        logger.Info($"Добавлен самолет {plane}");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не удалось поставить самолет");
+                    }
                 }
-                else
+                catch( HangarOverflowException ex)
                 {
-                    MessageBox.Show("Не удалось поставить самолет");
+                    logger.Warn($"Ангар переполнен");
+                    MessageBox.Show(ex.Message, "Переполнение", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -68,14 +84,26 @@ namespace Stormtrooper_21var_Saf
         {
             if (listBoxHangar.SelectedIndex > -1 && maskedTextBox.Text != "")
             {
-                var plane = hangarCollection[listBoxHangar.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
-                if (plane != null)
+                 try
                 {
-                    FormStormtrooper form = new FormStormtrooper();
-                    form.SetPlane(plane);
-                    form.ShowDialog();
+                    var plane = hangarCollection[listBoxHangar.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBox.Text);
+                    if (plane != null)
+                    {
+                        FormStormtrooper form = new FormStormtrooper();
+                        form.SetPlane(plane);
+                        form.ShowDialog();
+                        logger.Info($"Изъят самолет {plane} с места {maskedTextBox.Text}");
+                        Draw();
+                    }
                 }
-                Draw();
+                catch(HangarNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Не найдено", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
         private void buttonAddHangar_Click(object sender, EventArgs e)
@@ -83,9 +111,11 @@ namespace Stormtrooper_21var_Saf
             if (String.IsNullOrEmpty(textBoxNewLevelName.Text))
             {
                 MessageBox.Show("Введите название ангара", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             else
             {
+                logger.Info($"Добавили ангар {textBoxNewLevelName.Text}");
                 hangarCollection.AddHangar(textBoxNewLevelName.Text);
                 ReloadLevels();
             }
@@ -96,6 +126,7 @@ namespace Stormtrooper_21var_Saf
             {
                 if (MessageBox.Show($"Удалить ангар {listBoxHangar.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
+                    logger.Info($"Удалить парковку {listBoxHangar.SelectedItem.ToString()}");
                     hangarCollection.DelHangar(listBoxHangar.SelectedItem.ToString());
                     ReloadLevels();
                 }
@@ -103,22 +134,23 @@ namespace Stormtrooper_21var_Saf
         }
         private void listBoxHangar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (listBoxHangar.SelectedIndex > -1)
-            {
-                Draw();
-            }
+            logger.Info($"Перешли на парковку {listBoxHangar.SelectedItem.ToString()}");
+            Draw();
         }
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (hangarCollection.SaveData(saveFileDialog.FileName))
+                try
                 {
+                    hangarCollection.SaveData(saveFileDialog.FileName);
                     MessageBox.Show("Сохранение прошло успешно", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    logger.Info("Сохранено в файл " + saveFileDialog.FileName);
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Не сохранилось", "Результат", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    logger.Warn($"Неизвестная ошибка при сохранении");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -126,17 +158,24 @@ namespace Stormtrooper_21var_Saf
         {
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                if (hangarCollection.LoadData(openFileDialog.FileName))
+                try
                 {
+                    hangarCollection.LoadData(openFileDialog.FileName);
                     MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
-                   MessageBoxIcon.Information);
+                    MessageBoxIcon.Information);
+                    logger.Info("Загружено из файла " + openFileDialog.FileName);
                     ReloadLevels();
                     Draw();
                 }
-                else
+                catch (HangarOccupiedPlaceException ex)
                 {
-                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
-                   MessageBoxIcon.Error);
+                    logger.Warn($"Занятое место");
+                    MessageBox.Show(ex.Message, "Занятое место", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    logger.Warn($"Неизвестная ошибка при сохранении");
+                    MessageBox.Show(ex.Message, "Неизвестная ошибка при сохранении", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
