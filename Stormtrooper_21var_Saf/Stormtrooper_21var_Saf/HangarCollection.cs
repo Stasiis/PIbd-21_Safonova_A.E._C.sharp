@@ -63,8 +63,7 @@ namespace Stormtrooper_21var_Saf
                 foreach (var level in HangarStages)
                 {
                     fs.Write($"Hangar{separator}{level.Key}{Environment.NewLine}", fs);
-                    ITransport plane = null;
-                    for (int i = 0; (plane = level.Value.GetNext(i)) != null; i++)
+                    foreach (ITransport plane in level.Value)
                     {
                         if (plane != null)
                         {

@@ -8,7 +8,7 @@ using System.Drawing;
 namespace Stormtrooper_21var_Saf
 {
     //отрисовка самолета
-    public class Plane : Vehicle
+    public class Plane : Vehicle, IEquatable<Plane>
     {
         /// <summary>
         /// Ширина отрисовки самолета
@@ -171,6 +171,49 @@ namespace Stormtrooper_21var_Saf
             g.DrawLine(pen, _startPosX + 70, _startPosY + 60, _startPosX + 70, _startPosY + 70);
             g.DrawLine(pen, _startPosX + 70, _startPosY + 70, _startPosX + 85, _startPosY + 80);
             g.DrawLine(pen, _startPosX + 85, _startPosY + 80, _startPosX + 85, _startPosY + 60);
+        }
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+        }
+        public bool Equals(Plane other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Plane planeObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(planeObj);
+            }
         }
     }
 }

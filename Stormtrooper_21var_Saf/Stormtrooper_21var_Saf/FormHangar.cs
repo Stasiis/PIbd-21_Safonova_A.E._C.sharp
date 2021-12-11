@@ -179,5 +179,14 @@ namespace Stormtrooper_21var_Saf
                 }
             }
         }
+        private void buttonSort_Click(object sender, EventArgs e)
+        {
+            if (listBoxParking.SelectedIndex > -1)
+            {
+                parkingCollection[listBoxParking.SelectedItem.ToString()].Sort();
+                Draw();
+                logger.Info("Сортировка уровней");
+            }
+        }
     }
 }
