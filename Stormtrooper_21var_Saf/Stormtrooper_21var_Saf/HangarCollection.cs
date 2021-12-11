@@ -20,6 +20,7 @@ namespace Stormtrooper_21var_Saf
             HangarStages = new Dictionary<string, Hangar<Vehicle>>();
             this.pictureWidth = pictureWidth;
             this.pictureHeight = pictureHeight;
+            logger = LogManager.GetCurrentClassLogger();
         }
         public void AddHangar(string name)
         {
