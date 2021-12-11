@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Stormtrooper_21var_Saf
 {
-    class HangarOccupiedPlaceException : Exception
+    public class HangarOccupiedPlaceException : Exception
     {
         public HangarOccupiedPlaceException() : base("Место занято")
         { }
