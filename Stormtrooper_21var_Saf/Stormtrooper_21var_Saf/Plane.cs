@@ -172,6 +172,10 @@ namespace Stormtrooper_21var_Saf
             g.DrawLine(pen, _startPosX + 70, _startPosY + 70, _startPosX + 85, _startPosY + 80);
             g.DrawLine(pen, _startPosX + 85, _startPosY + 80, _startPosX + 85, _startPosY + 60);
         }
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+        }
         public bool Equals(Plane other)
         {
             if (other == null)
