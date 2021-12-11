@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Stormtrooper_21var_Saf
 {
-    public class Stormtrooper : Plane
+    public class Stormtrooper : Plane, IEquatable<Stormtrooper>
     {
         /// <summary>
         /// Дополнительный цвет
@@ -67,6 +67,41 @@ namespace Stormtrooper_21var_Saf
         public override string ToString()
         {
             return $"{base.ToString()}{separator}{DopColor.Name}{separator}{Rockets}{separator}{Window}";
+        }
+        public bool Equals(Stormtrooper other)
+        {
+            if (!base.Equals((Plane)other))
+            {
+                return false;
+            }
+            else if (DopColor != other.DopColor)
+            {
+                return false;
+            }
+            else if (Rockets != other.Rockets)
+            {
+                return false;
+            }
+            else if (Window != other.Window)
+            {
+                return false;
+            }
+            return true;
+        }
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Stormtrooper planeObj))
+            {
+                return false;
+            }
+            else
+            {
+                return Equals(planeObj);
+            }
         }
     }
 }
