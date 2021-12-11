@@ -48,13 +48,13 @@ namespace Stormtrooper_21var_Saf
                 p._places.Add(Plane);
                 return p._places.Count;
             }
-            return -1;
+            throw new HangarOverflowException();
         }
         public static T operator -(Hangar<T> p, int index)
         {
             if (index <= -1 || index >= p._places.Count)
             {
-                return null;
+                throw new HangarNotFoundException(index);
             }
             T plane = p._places[index];
             p._places.RemoveAt(index);

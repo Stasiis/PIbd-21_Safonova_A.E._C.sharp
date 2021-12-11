@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NLog;
 
 namespace Stormtrooper_21var_Saf
 {
@@ -13,11 +14,13 @@ namespace Stormtrooper_21var_Saf
         private readonly int pictureWidth;
         private readonly int pictureHeight;
         private readonly char separator = ':';
+        private readonly Logger logger;
         public HangarCollection(int pictureWidth, int pictureHeight)
         {
             HangarStages = new Dictionary<string, Hangar<Vehicle>>();
             this.pictureWidth = pictureWidth;
             this.pictureHeight = pictureHeight;
+            logger = LogManager.GetCurrentClassLogger();
         }
         public void AddHangar(string name)
         {
@@ -77,14 +80,14 @@ namespace Stormtrooper_21var_Saf
                         }
                     }
                 }
-                return true;
             }
         }
         public bool LoadData(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                logger.Warn("Файл не существует");
+                throw new FileNotFoundException();
             }
             HangarStages.Clear();
             using (StreamReader sr = new StreamReader(filename, Encoding.UTF8))
@@ -95,7 +98,12 @@ namespace Stormtrooper_21var_Saf
                 lines = sr.ReadLine();
                 if (!lines.Contains("HangarCollection"))
                 {
-                    return false;
+                    logger.Warn("Неверный формат файла");
+                    throw new FileFormatException("Неверный формат файла");
+                }
+                else
+                {
+                    parkingStages.Clear();
                 }
                 while ((lines = sr.ReadLine()) != null)
                 {
@@ -110,7 +118,8 @@ namespace Stormtrooper_21var_Saf
                         var result = HangarStages[key] + plane;
                         if (result < 0)
                         {
-                            return false;
+                            logger.Warn("Не удалось загрузить самолет на место");
+                            throw new IndexOutOfRangeException("Не удалось загрузить самолет на место");
                         }
                     }
                     else if (lines.Split(separator)[0] == "Stormtrooper")
@@ -119,16 +128,12 @@ namespace Stormtrooper_21var_Saf
                         var result = HangarStages[key] + plane;
                         if (result < 0)
                         {
-                            return false;
+                            logger.Warn("Не удалось загрузить самолет на место");
+                            throw new IndexOutOfRangeException("Не удалось загрузить самолет на место");
                         }
-                    }
-                    else
-                    {
-                        continue;
                     }
                 }
             }
-            return true;
         }
     }
 }
